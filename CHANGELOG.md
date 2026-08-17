@@ -3,6 +3,27 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] — 2026-08-17
+
+### Added
+
+- **OpenAI reference images.** `gpt-image-*` accepts up to 16 reference images,
+  but only on `/images/edits` with multipart encoding — one repeated `image[]`
+  part per reference. The provider now switches endpoints automatically when
+  references are present; without them it stays on `/images/generations`.
+  Previously the module accepted a `references` argument and silently dropped
+  it, so callers got a text-to-image result with no indication their references
+  were ignored.
+- References for this path must be base64 or data-URL data. A remote `http(s)`
+  URL is rejected with a clear message rather than fetched server-side, so the
+  Worker can't be turned into an SSRF proxy by a caller-supplied URL.
+
+### Changed
+
+- README's provider table now reports OpenAI as multi-ref capable. Grok Imagine
+  remains the one provider whose reference support is unwired, documented both
+  in the table and in `grok.js` itself.
+
 ## [1.0.0] — 2026-08-17
 
 First public release. Extracted from a private application, with the private
@@ -54,4 +75,5 @@ branding.
   would.
 - 72 tests, including a JSX compile gate so a broken component fails the suite.
 
+[1.1.0]: https://github.com/SolanceLab/solance-canvas/releases/tag/v1.1.0
 [1.0.0]: https://github.com/SolanceLab/solance-canvas/releases/tag/v1.0.0

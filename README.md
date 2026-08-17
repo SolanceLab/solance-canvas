@@ -37,14 +37,17 @@ something broke.
 | `gemini` | Google Gemini | ✅ | ✅ multi-ref | each reference becomes its own inline part |
 | `grok` / `grok-image` | xAI | ✅ | ❌ | ⚠️ can return a temporary URL — see lesson 1 |
 | `fal` | fal.ai | ✅ | ✅ multi-ref | async queue; slow models return a pending ticket |
-| `openai` | OpenAI | ✅ | ❌ | `resolution` is a `WxH` string here, not an aspect |
+| `openai` | OpenAI | ✅ | ✅ multi-ref (≤16) | switches to `/images/edits`; `resolution` is a `WxH` string here, not an aspect |
 | `stability` | Stability AI | ✅ | ❌ | |
 | `agnes` | Agnes (gateway) | ✅ | ✅ multi-ref | OpenAI-compatible reseller fronting several labs |
 | `venice` | Venice.ai | ✅ | ✅ single-ref | privacy-first; content filter OFF by default — see below |
 
 Reference-image support is per-provider and reflects what the code actually sends,
-not what the provider's docs advertise. Grok Imagine and gpt-image-2 both accept
-reference images; this layer does not pass them yet, and the modules say so.
+not what the provider's docs advertise. The one remaining gap is Grok Imagine: xAI
+accepts reference images, this layer does not pass them yet, and `grok.js` says so
+in place. OpenAI references are passed as multipart `image[]` parts on the edits
+endpoint, and must be base64 or data-URL data — a remote URL is rejected rather
+than fetched, so this Worker can't be used as an SSRF proxy.
 
 **Environment variables**, checked in order per provider:
 
