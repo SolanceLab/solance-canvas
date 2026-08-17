@@ -15,12 +15,72 @@ export const label = 'xAI Grok';
 export const envKeys = ['XAI_API_KEY'];
 export const aliases = ['grok-image'];
 
-// NOTE: the source this was carved from carries a TODO claiming "Grok
-// Imagine supports up to 3 refs — only first used currently," but the
-// actual request body never sends `references` at all — txt2img only.
-// Kept faithful to the real behavior rather than the stale comment;
-// wiring references through is the TODO this file inherits.
-export async function generate(env, { prompt, model, key }) {
+// Reference images go to a DIFFERENT endpoint (`/images/edits`), so they
+// cannot simply be added to the generations body. xAI takes them as JSON —
+// `image` for a single reference, `images[]` for several — and each one is
+// either a public URL or a base64 data URL, so no multipart and no
+// server-side fetching is involved.
+//
+// Aspect ratios xAI accepts directly; anything else becomes `auto`.
+const EDIT_ASPECTS = new Set(['1:1', '3:4', '4:3', '9:16', '16:9', '2:3', '3:2']);
+
+function editAspect(aspect) {
+  return EDIT_ASPECTS.has(aspect) ? aspect : 'auto';
+}
+
+// xAI's resolution tiers are lowercase — '1k' / '2k'.
+function editResolution(longEdge) {
+  return Number(longEdge) >= 2048 ? '2k' : '1k';
+}
+
+// The edit path asks for `b64_json` rather than a URL on purpose: it returns
+// the bytes directly, which sidesteps the 48-hour URL expiry described at the
+// top of this file entirely.
+async function editWithReferences({ prompt, model, key, aspect, longEdge, refs }) {
+  const body = {
+    model,
+    prompt,
+    aspect_ratio: editAspect(aspect),
+    resolution: editResolution(longEdge),
+    response_format: 'b64_json',
+  };
+  // `image` and `images` are mutually exclusive in xAI's schema. With several
+  // references the prompt can address them as <IMAGE_0>, <IMAGE_1>, …
+  if (refs.length === 1) {
+    body.image = { url: refs[0] };
+  } else {
+    body.images = refs.map((url) => ({ url }));
+  }
+
+  const response = await fetch('https://api.x.ai/v1/images/edits', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${key}`,
+    },
+    body: JSON.stringify(body),
+  });
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.error?.message || data.error || `xAI API error: ${response.status}`);
+  }
+
+  const first = data.data?.[0] || {};
+  const mime = first.mime_type || 'image/png';
+  const imageUrl = first.b64_json ? `data:${mime};base64,${first.b64_json}` : (first.url || null);
+  if (!imageUrl) {
+    throw new Error('No image returned from Grok');
+  }
+  return { image_url: imageUrl, seed: null, mime_type: mime };
+}
+
+export async function generate(env, { prompt, model, key, aspect, longEdge, references }) {
+  const refs = (references || []).filter(Boolean);
+  if (refs.length > 0) {
+    return editWithReferences({ prompt, model, key, aspect, longEdge, refs });
+  }
+
   const response = await fetch('https://api.x.ai/v1/images/generations', {
     method: 'POST',
     headers: {

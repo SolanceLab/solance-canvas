@@ -3,6 +3,25 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] — 2026-08-17
+
+### Added
+
+- **Grok Imagine reference images.** xAI accepts references on `/images/edits`
+  as JSON — `image` for a single reference, `images[]` for several (mutually
+  exclusive; address them as `<IMAGE_0>`, `<IMAGE_1>` … in the prompt). Each is
+  a public URL or a base64 data URL, so no multipart and no server-side
+  fetching. Without references the provider stays on `/images/generations`.
+- The edit path requests `b64_json`, so it returns image bytes rather than one
+  of xAI's expiring URLs — the failure documented in lesson 1 cannot occur on
+  this route.
+
+### Changed
+
+- Every provider whose upstream API accepts reference images now sends them.
+  The provider table's `img2img / refs` column reflects working code, not
+  intent.
+
 ## [1.1.0] — 2026-08-17
 
 ### Added
@@ -75,5 +94,6 @@ branding.
   would.
 - 72 tests, including a JSX compile gate so a broken component fails the suite.
 
+[1.2.0]: https://github.com/SolanceLab/solance-canvas/releases/tag/v1.2.0
 [1.1.0]: https://github.com/SolanceLab/solance-canvas/releases/tag/v1.1.0
 [1.0.0]: https://github.com/SolanceLab/solance-canvas/releases/tag/v1.0.0
