@@ -1,0 +1,114 @@
+/*
+ * solance-canvas — design tokens.
+ *
+ * The variable NAMES are historical (extracted from the app this library came
+ * from) and their meanings are fixed by how the components use them:
+ *
+ *   --page, --page-dim, --page-muted, --page-faint   TEXT, strongest → faintest
+ *   --ink, --ink-deep, --ink-raised                  SURFACES: base controls,
+ *                                                    inset wells, raised popovers
+ *   --rule-dim/-mid/-strong                          hairline borders
+ *   --gold-*                                         the single accent
+ *   --blue                                           informational states
+ *
+ * The palette is deliberately neutral — warm greys with one amber accent —
+ * meant to sit quietly inside somebody else's design system. Override any
+ * variable in your own stylesheet and the UI follows.
+ *
+ * This file is the SOURCE for the shipped stylesheet. Consumers import the
+ * built `ui/canvas.css` (tokens + the compiled utility classes the components
+ * use); rebuild it with `npm run build:css` after editing this file or any
+ * component markup.
+ */
+
+:root {
+  /* Text, strongest to faintest. */
+  --page:         #ece7d9;
+  --page-dim:     #c9c2b0;
+  --page-muted:   #96907d;
+  --page-faint:   #6b6555;
+
+  /* Surfaces. `--ink` is the base control surface; the host page supplies
+     its own ground behind the components (a deep neutral works best). */
+  --ink:          #1d1c15;
+  --ink-deep:     #100f0a;
+  --ink-raised:   #2a2820;
+
+  /* Hairlines, in increasing contrast. */
+  --rule-dim:     #2e2b21;
+  --rule-mid:     #403c2e;
+  --rule-strong:  #5a5340;
+
+  /* The single accent. Rename or recolour freely — nothing depends on it
+     being gold beyond the variable name. */
+  --gold-text:    #d3a24a;
+  --gold-soft:    #4a3c1c;
+  --gold-glow:    rgba(211, 162, 74, 0.22);
+
+  /* Secondary accent, used for informational states. */
+  --blue:         #7fa5cf;
+
+  /* Focus ring — keyboard users need this to be visible. Do not remove it. */
+  --focus:        #d3a24a;
+  --focus-offset: 2px;
+}
+
+/* Light theme. The components carry no light/dark logic of their own; they
+   just read the variables, so a media query is enough to serve both. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-canvas-theme="dark"]) {
+    --page:         #23211a;
+    --page-dim:     #4d4a3e;
+    --page-muted:   #7a7462;
+    --page-faint:   #a89f88;
+
+    --ink:          #ffffff;
+    --ink-deep:     #efece3;
+    --ink-raised:   #ffffff;
+
+    --rule-dim:     #e0dbcd;
+    --rule-mid:     #cbc4b1;
+    --rule-strong:  #a89f88;
+
+    --gold-text:    #8a6414;
+    --gold-soft:    #f0e4c6;
+    --gold-glow:    rgba(138, 100, 20, 0.14);
+
+    --blue:         #3a6591;
+
+    --focus:        #8a6414;
+  }
+}
+
+/* Explicit opt-in, for apps that manage their own theme switch rather than
+   following the OS. Wins over the media query in both directions. */
+:root[data-canvas-theme="dark"] {
+  --page:       #ece7d9;
+  --page-dim:   #c9c2b0;
+  --page-muted: #96907d;
+  --page-faint: #6b6555;
+  --ink:        #1d1c15;
+  --ink-deep:   #100f0a;
+  --ink-raised: #2a2820;
+  --rule-dim:   #2e2b21;
+  --rule-mid:   #403c2e;
+  --rule-strong:#5a5340;
+  --gold-text:  #d3a24a;
+  --gold-soft:  #4a3c1c;
+  --gold-glow:  rgba(211, 162, 74, 0.22);
+  --blue:       #7fa5cf;
+  --focus:      #d3a24a;
+}
+
+/* Keyboard focus must stay visible wherever the components put it. */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: var(--focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(*) {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

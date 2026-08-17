@@ -1,0 +1,15 @@
+/*
+ * Build input for the shipped stylesheet — NOT the file consumers import.
+ *
+ *   npm run build:css   →   ui/canvas.css
+ *
+ * Emits: the design tokens (./theme.css) + the Tailwind theme layer + ONLY
+ * the utility classes actually used by the components in this directory.
+ * Preflight is deliberately excluded so importing the built file never
+ * resets a host application's own styles.
+ */
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "./theme.css";
+@source "./";

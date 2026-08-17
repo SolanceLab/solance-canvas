@@ -1,0 +1,65 @@
+{
+  "name": "solance-canvas",
+  "version": "1.0.0",
+  "description": "Multi-provider image generation for Cloudflare Workers \u2014 seven providers behind one interface, plus a React canvas UI.",
+  "keywords": [
+    "image-generation",
+    "cloudflare-workers",
+    "text-to-image",
+    "image-editing",
+    "byo-key",
+    "gemini",
+    "openai",
+    "stability",
+    "fal",
+    "venice",
+    "qwen",
+    "react"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "private": false,
+  "homepage": "https://github.com/SolanceLab/solance-canvas",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SolanceLab/solance-canvas.git"
+  },
+  "exports": {
+    "./worker": "./worker/src/index.js",
+    "./providers": "./worker/src/providers/index.js",
+    "./storage": "./worker/src/storage.js",
+    "./ui": "./ui/src/index.js",
+    "./ui/canvas.css": "./ui/src/canvas.css"
+  },
+  "files": [
+    "worker",
+    "ui",
+    "docs",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "wrangler dev --config worker/wrangler.toml",
+    "deploy": "wrangler deploy --config worker/wrangler.toml",
+    "test": "vitest run",
+    "build:css": "tailwindcss -i ui/src/canvas.input.css -o ui/canvas.css",
+    "demo": "esbuild demo/main.jsx --bundle --outdir=demo/dist --entry-names=bundle --loader:.js=jsx --jsx=automatic --define:process.env.NODE_ENV='\"production\"' && python3 -m http.server 8017 -d demo"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.3.3",
+    "vitest": "^2.0.0",
+    "wrangler": "^4.0.0"
+  }
+}

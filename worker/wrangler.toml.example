@@ -1,0 +1,94 @@
+# wrangler.toml.example — copy to wrangler.toml and fill in the blanks.
+#
+#   cp wrangler.toml.example wrangler.toml
+#
+# wrangler.toml itself is gitignored (see .gitignore) so your account id /
+# bucket name / routes don't end up in git. Secrets NEVER go in this file —
+# they're pushed with `wrangler secret put`, one command per line below.
+
+name = "solance-canvas"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# ── Storage (optional) ──────────────────────────────────────────────
+#
+# Uncomment to give the Worker an R2 bucket to store generated images in
+# (see src/storage.js for why this matters — provider URLs rot, and
+# base64 data URLs are too big for most databases to hold).
+#
+# Without this binding, the Worker still works: /generate returns the
+# provider's own image_url unchanged, and the response's `image_stored`
+# field is `false` so callers know not to expect a /image/:key URL.
+#
+# [[r2_buckets]]
+# binding = "IMAGE_BUCKET"
+# bucket_name = "solance-canvas-images"
+
+# ── CORS (recommended for production) ──────────────────────────────
+#
+# This Worker has no auth of its own — CORS is what stops a page on
+# someone else's site from using your endpoint from a visitor's browser
+# (see src/http.js for what it does and does not buy you).
+#
+# When set to a specific list, a mismatched Origin is rejected
+# server-side with a 403 before the request is routed — not just denied
+# the ability to read the response, so a cross-origin browser request can
+# no longer trigger the Worker's paid provider call at all.
+#
+# Unset = "*" (open — fine for local dev). Set to your site's origin(s)
+# before you deploy somewhere real:
+#
+# [vars]
+# ALLOWED_ORIGIN = "https://your-app.example"
+#
+# Comma-separate for more than one origin:
+# ALLOWED_ORIGIN = "https://your-app.example,https://staging.your-app.example"
+
+# ── Provider secrets ────────────────────────────────────────────────
+#
+# Set only the ones for the providers you actually plan to use — an unset
+# key just means that provider errors with a clear "no key configured"
+# message instead of being called. Push each with wrangler, never write
+# the value here:
+#
+#   wrangler secret put GEMINI_API_KEY
+#   wrangler secret put XAI_API_KEY
+#   wrangler secret put FAL_KEY
+#   wrangler secret put OPENAI_API_KEY
+#   wrangler secret put STABILITY_API_KEY
+#   wrangler secret put VENICE_API_KEY
+#
+# The authoritative list of env var names per provider is each provider
+# module's `envKeys` export (src/providers/*.js) — check there if a
+# provider keeps reporting "no key configured" after you've set one.
+#
+# Visitors can also send their own provider key per-request in an
+# X-Provider-Key header — it's used for that one request only and is
+# never stored or logged server-side. These env secrets are the fallback
+# the Worker uses when no header is sent.
+
+# ── Venice content filter ───────────────────────────────────────────
+#
+# Venice's API defaults `safe_mode` to ON; this Worker sends the flag
+# explicitly and sends `false` unless you opt in here. Set it to "true"
+# if you want Venice's filter applied to both the generate and edit
+# endpoints. Any other value (or unset) means the filter stays off.
+#
+# [vars]
+# VENICE_SAFE_MODE = "true"
+
+# ── Operator auth (recommended for public deploys) ──────────────────
+#
+# Unset (the default) = POST /generate and POST /generate/result are open to
+# anyone who can reach the Worker — fine for local dev or a deploy you keep
+# private, but CORS alone does NOT stop this (it only constrains browsers,
+# not curl/scripts — see src/http.js). Set AUTH_TOKEN before you deploy
+# somewhere public and callers must send `Authorization: Bearer <token>` on
+# both POST routes or get a 401. GET /image/:key stays public either way.
+#
+#   wrangler secret put AUTH_TOKEN
+#
+# Cloudflare-side rate limiting (WAF rate-limiting rules, a Cloudflare Access
+# policy, etc.) is a further, separate line of defense worth adding on a
+# public deploy — that's operator/dashboard configuration, out of scope for
+# this Worker's own code.
