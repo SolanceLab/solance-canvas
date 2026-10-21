@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // Minimal demo harness — mounts the library exactly as a host app would.
 // Run:  npm run demo   then open http://localhost:8017
 import { useState } from 'react'

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Where a generated image actually lives ────────────────────────
 //
 // Three shapes exist in a generation row's `image_url`, and all three must

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Bring-your-own provider keys ────────────────────────────────────
 // Keys entered in CanvasSettings live ONLY in this browser's localStorage.
 // They are sent per-request as an `X-Provider-Key` header (see

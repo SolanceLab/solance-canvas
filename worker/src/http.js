@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // Minimal HTTP helpers for the Worker.
 //
 // This Worker has no per-caller authentication of its own (see README). That

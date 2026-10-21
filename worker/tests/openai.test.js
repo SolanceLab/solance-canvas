@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 import { describe, it, expect, afterEach, vi } from 'vitest'
 import { generate } from '../src/providers/openai.js'
 

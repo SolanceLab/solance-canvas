@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 import { useState, useEffect } from 'react'
 import IMAGE_PROVIDERS from './imageProviders'
 import DEFAULT_STYLES, { withDefaultStyles, readStoredStyles, STYLES_STORAGE_KEY } from './stylePresets'

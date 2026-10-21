@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Canvas API client ────────────────────────────────────────────────
 // Canvas.jsx and CanvasSettings.jsx don't talk to `fetch` directly — every
 // request goes through a client built here, so a consuming app can point

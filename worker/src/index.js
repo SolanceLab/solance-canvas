@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // solance-canvas — multi-provider image-generation Worker.
 //
 // Four routes:

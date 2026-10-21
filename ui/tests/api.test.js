@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 import { describe, it, expect, vi } from 'vitest'
 import { createApiClient, ApiError } from '../src/api'
 

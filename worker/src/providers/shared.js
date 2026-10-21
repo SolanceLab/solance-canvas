@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Shared helpers ───────────────────────────────────────────────────
 // Utilities used by more than one provider module. Provider-specific
 // mapping tables (aspect ratios, size tiers, etc.) live in their own

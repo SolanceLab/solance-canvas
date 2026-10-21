@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Canvas style presets ───────────────────────────────────────────
 // Single source of truth, imported by Canvas.jsx + CanvasSettings.jsx.
 // Each preset's `prompt` is appended after the subject as the

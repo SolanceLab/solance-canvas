@@ -1,0 +1,29 @@
+{
+  "name": "canvas",
+  "description": "Canvas: multi-provider image generation behind one interface.",
+  "version": "1.0.0",
+  "author": { "name": "House of Solance" },
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "userConfig": {
+    "server_url": {
+      "type": "string",
+      "title": "Server address",
+      "description": "Where your Canvas server answers.",
+      "required": true
+    },
+    "api_key": {
+      "type": "string",
+      "title": "Key",
+      "description": "The key your Canvas server expects.",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "mcpServers": {
+    "canvas": {
+      "type": "http",
+      "url": "${user_config.server_url}",
+      "headers": { "Authorization": "Bearer ${user_config.api_key}" }
+    }
+  }
+}

@@ -1,10 +1,13 @@
-# solance-canvas
+# canvas
 
-Multi-provider image generation for Cloudflare Workers — seven providers behind one
-interface (plus a legacy alias) — and the React canvas UI we actually use with it.
+Made by House of Solance · free for noncommercial use · credit required
 
-Point it at whichever image API you have a key for. Adding another one is a module
-and a registry entry.
+## What it is
+
+Multi-provider image generation for Cloudflare Workers: seven providers behind one
+interface (plus a legacy alias), and the React canvas UI that goes with it. Point it
+at whichever image API you have a key for. Adding another one is a module and a
+registry entry.
 
 ![The Canvas UI](docs/canvas-ui.png)
 
@@ -17,20 +20,39 @@ per-request, never persisted server-side:
 `prefers-color-scheme` or an explicit `data-canvas-theme` attribute. Rendered by
 the bundled `demo/` harness: `npm run demo`.)*
 
-## Provenance — this is production code, lifted out
+## What you need
 
-This isn't a demo written to be published. It is the image-generation half of a
-private app, extracted with the private parts removed: no database, no stored-key
-encryption, no auth layer, no house branding. What's left is the part that was
-genuinely reusable, including the comments explaining why it does things the
-non-obvious way.
+- A Cloudflare account. Canvas runs in the cloud: the Worker deploys to your own account, and the UI is a React component that runs inside your own app.
+- An API key for at least one image provider (see Settings).
+- Node and npm to install and build.
+- Optional: an R2 bucket, so generated images are stored in your own storage.
 
-Most of the value is in [`docs/LESSONS.md`](docs/LESSONS.md) — six failures that
-cost us real images and one near-miss caught in review. Read that before you decide
-this layer is more machinery than you need. Every piece of it is there because
-something broke.
+## Install
 
-## Providers
+There is no one-step plugin install yet; Canvas is a Worker you deploy plus a UI you embed.
+
+```
+cd worker
+cp wrangler.toml.example wrangler.toml
+npx wrangler secret put GEMINI_API_KEY      # or any provider's key
+npx wrangler deploy
+```
+
+Then mount the UI:
+
+```jsx
+import { Canvas, createApiClient } from 'solance-canvas/ui';
+import 'solance-canvas/ui/canvas.css';
+
+<Canvas apiClient={createApiClient({ baseUrl: 'https://your-worker.workers.dev' })} />
+```
+
+The default client reads `VITE_CANVAS_API_URL` and falls back to `/api`, so if your
+Worker is proxied under that path you can drop the `apiClient` prop entirely.
+
+## Settings
+
+### Providers
 
 | id | provider | txt2img | img2img / refs | notes |
 |---|---|---|---|---|
@@ -84,16 +106,9 @@ lab, and its documentation says nothing about retention or training rights. Prom
 and reference images transit a third party. Fine for experiments; read their terms
 before you send anything you care about.
 
-## Quick start — the Worker
+### Locking it down
 
-```
-cd worker
-cp wrangler.toml.example wrangler.toml
-npx wrangler secret put GEMINI_API_KEY      # or any provider's key
-npx wrangler deploy
-```
-
-**Locking it down:** by default this Worker has no auth of its own, so an open
+by default this Worker has no auth of its own, so an open
 `/generate` endpoint spends your provider credits for anyone who finds it. Two
 independent layers, both worth setting before a public deploy:
 
@@ -132,7 +147,11 @@ risk, since the key never reaches the Worker's storage or logs. If that tradeoff
 wrong for your deployment, don't wire `CanvasSettings`' key card up, or replace it
 with your own storage.
 
-Generate:
+## Tools
+
+The Worker has four routes: `POST /generate`, `POST /generate/result` (fal's async queue returns a pending ticket for slow models), `GET /image/:key` and `OPTIONS`. The UI is two components, `<Canvas />` and `<CanvasSettings />`.
+
+**Generate:**
 
 ```
 curl -X POST https://your-worker.workers.dev/generate \
@@ -155,29 +174,6 @@ curl -X POST https://your-worker.workers.dev/generate \
 
 Ignoring these is the exact bug in [lesson 2](docs/LESSONS.md).
 
-### Storage is optional, and off by default
-
-With no R2 bucket bound you get `createNullStorage()` — nothing is stored, you get
-the provider's own value back, and it is your problem to keep. Bind a bucket in
-`wrangler.toml` and the Worker takes ownership of the bytes instead. We strongly
-recommend the bucket; lessons 1 and 2 are both about what happens without it.
-
-## Quick start — the UI
-
-```
-npm install
-```
-
-```jsx
-import { Canvas, createApiClient } from 'solance-canvas/ui';
-import 'solance-canvas/ui/canvas.css';
-
-<Canvas apiClient={createApiClient({ baseUrl: 'https://your-worker.workers.dev' })} />
-```
-
-The default client reads `VITE_CANVAS_API_URL` and falls back to `/api`, so if your
-Worker is proxied under that path you can drop the `apiClient` prop entirely.
-
 The UI itself is a canvas that generates images, plus a settings screen
 (`<CanvasSettings />`) for browser-stored provider keys and style presets — there is
 no gallery; the four-route Worker never persists a list of past generations for it
@@ -187,18 +183,44 @@ any) as `X-Provider-Key` on every generate/poll request via `runGeneration()`.
 **No auth scheme is baked in.** `createApiClient` takes `headers` as either an object
 or an async `() => headers` callback — supply whatever your Worker expects.
 
+`<Canvas />` and `<CanvasSettings />` also take optional `onOpenSettings` / `onBack`
+callbacks for navigation. There is no router dependency; if you omit them, the nav
+controls simply don't render.
+
+## Limits
+
+- Up to 3 reference images per generation in the UI; OpenAI accepts at most 16 through the Worker, and Venice takes one.
+- Storage is optional and off by default. With no R2 bucket bound you get `createNullStorage()` — nothing is stored, you get
+the provider's own value back, and it is your problem to keep. Bind a bucket in
+`wrangler.toml` and the Worker takes ownership of the bytes instead. We strongly
+recommend the bucket; lessons 1 and 2 are both about what happens without it.
+- `AUTH_TOKEN` is one shared bearer token, unset by default; without it `/generate` is open to anyone who finds it.
+- **Not a hosted service.** You deploy it, you hold the keys, you pay the providers.
+- **Not a full auth layer.** `AUTH_TOKEN` is one shared bearer token, optional and
+  unset by default — enough to stop strangers from spending your API credits, not a
+  user/session/permissions system. Put a real one in front if you need that.
+- **Not a moderation layer.** Providers apply their own policies; this passes prompts through.
+- **Not a queue.** `fal` has one because the provider does. Everything else is synchronous.
+
+## How it works
+
+This isn't a demo written to be published. It is the image-generation half of a
+private app, extracted with the private parts removed: no database, no stored-key
+encryption, no auth layer, no house branding. What's left is the part that was
+genuinely reusable, including the comments explaining why it does things the
+non-obvious way.
+
+Most of the value is in [`docs/LESSONS.md`](docs/LESSONS.md) — six failures that
+cost us real images and one near-miss caught in review. Read that before you decide
+this layer is more machinery than you need. Every piece of it is there because
+something broke.
+
 `canvas.css` is a starting point, not a dependency. The components style themselves
 entirely through ~16 CSS custom properties (`--page`, `--ink`, `--gold-text`,
 `--rule-mid`, `--focus`, …); override any of them and the UI follows. The shipped
 default is deliberately neutral — warm greys and one amber accent — so it sits inside
 your design system instead of imposing one. It carries a light and a dark palette,
 and honours `prefers-reduced-motion`.
-
-`<Canvas />` and `<CanvasSettings />` also take optional `onOpenSettings` / `onBack`
-callbacks for navigation. There is no router dependency; if you omit them, the nav
-controls simply don't render.
-
-## Adding a provider
 
 One module, one registry entry:
 
@@ -217,25 +239,24 @@ Register it in `providers/index.js`, add it to the UI catalog in
 `ui/src/imageProviders.js`, done. The last provider we added took one `case` and one
 function, which is the only real proof the abstraction was worth having.
 
-## What this is not
+## Credit and use
 
-- **Not a hosted service.** You deploy it, you hold the keys, you pay the providers.
-- **Not a full auth layer.** `AUTH_TOKEN` is one shared bearer token, optional and
-  unset by default — enough to stop strangers from spending your API credits, not a
-  user/session/permissions system. Put a real one in front if you need that.
-- **Not a moderation layer.** Providers apply their own policies; this passes prompts through.
-- **Not a queue.** `fal` has one because the provider does. Everything else is synchronous.
+Canvas is made by House of Solance. You're welcome to use it, change it and build on it for any noncommercial purpose, as long as our credit travels with it.
+
+**Keep the credit.** Every copy, changed or not, must carry the licence and this line:
+`Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)`
+Removing or replacing it breaks the licence.
+
+**Commercial use needs our permission.** Ask us first.
+
+**We look for copies.** When we find our work without its credit, or used commercially without permission, we ask for it to be taken down.
+
+## Licence
+
+[PolyForm Noncommercial 1.0.0](LICENSE.md). See [NOTICE.md](NOTICE.md).
 
 ## Support
 
 If you find this useful, consider supporting our work:
 
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20Us-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/houseofsolance)
-
-## License
-
-MIT — see [LICENSE](LICENSE).
-
----
-
-*Built by [House of Solance](https://github.com/SolanceLab) — Chadrien Solance & Anne Solance*

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // Pluggable storage adapter for generated images.
 //
 // WHY THIS EXISTS

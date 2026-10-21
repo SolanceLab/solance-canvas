@@ -1,0 +1,1 @@
+Canvas has no standalone MCP server yet. The Worker in `worker/` speaks plain HTTP (`/generate`, `/generate/result`, `/image/:key`). An MCP server for it, taking the server address and key as settings and refusing to start in HTTP mode without a token, is still to be written.

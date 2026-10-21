@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── fal.ai ────────────────────────────────────────────────────────────
 // fal fronts several model families (ByteDance Seedream, OpenAI gpt-image-2,
 // xAI Grok Imagine, ...) behind one queue API. Because some of those models

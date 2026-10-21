@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 export { default as Canvas } from './Canvas'
 export { default as CanvasSettings } from './CanvasSettings'
 export { default as imageProviders } from './imageProviders'

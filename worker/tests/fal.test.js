@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 import { describe, it, expect, afterEach, vi } from 'vitest'
 import { poll } from '../src/providers/fal.js'
 

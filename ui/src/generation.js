@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Generate + poll orchestration ───────────────────────────────────
 // Pulled out of Canvas.jsx as its own pure, node-testable function.
 // Why a separate module: whether a visitor's provider key gets forwarded

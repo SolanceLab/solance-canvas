@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import {
   PROVIDER_KEYS_STORAGE_KEY,

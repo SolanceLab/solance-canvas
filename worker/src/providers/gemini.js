@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Google Gemini ────────────────────────────────────────────────────
 // generateContent with inline image parts. Full multi-reference support:
 // each reference becomes its own inlineData part, with the text prompt

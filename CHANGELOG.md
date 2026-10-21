@@ -3,6 +3,15 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- **Licence: PolyForm Noncommercial 1.0.0** (with a Required Notice, see `NOTICE.md`), replacing MIT. Copies already released under MIT (v1.0.0 to v1.2.0) stay MIT; the new licence applies to this version onward.
+- Owner line is now House of Solance throughout; README restructured to the House of Solance release standard (same sections as every room).
+- Added `CONTRACT.md`, `NOTICE.md`, `Makefile` (`make test`), a CI workflow, and a `plugin/` folder. No code behaviour changed.
+- Copyright line added at the top of every source file.
+
 ## [1.2.0] — 2026-08-17
 
 ### Added

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Agnes AI (Sapiens AI) ────────────────────────────────────────────
 // OpenAI-compatible gateway: POST https://apihub.agnes-ai.com/v1/images/generations.
 // Three contract quirks, all from their docs plus a live probe, none of

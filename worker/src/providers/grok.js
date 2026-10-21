@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── xAI Grok (Grok Imagine) ──────────────────────────────────────────
 // Serves BOTH the `grok` and `grok-image` provider ids — xAI has shipped
 // this under both names at different times, so both route here.

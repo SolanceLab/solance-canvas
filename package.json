@@ -1,7 +1,7 @@
 {
   "name": "solance-canvas",
   "version": "1.2.0",
-  "description": "Multi-provider image generation for Cloudflare Workers \u2014 seven providers behind one interface, plus a React canvas UI.",
+  "description": "Multi-provider image generation for Cloudflare Workers — seven providers behind one interface, plus a React canvas UI.",
   "keywords": [
     "image-generation",
     "cloudflare-workers",
@@ -16,7 +16,7 @@
     "qwen",
     "react"
   ],
-  "license": "MIT",
+  "license": "PolyForm-Noncommercial-1.0.0",
   "type": "module",
   "private": false,
   "homepage": "https://github.com/SolanceLab/solance-canvas",
@@ -37,7 +37,8 @@
     "docs",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE.md",
+    "NOTICE.md"
   ],
   "scripts": {
     "dev": "wrangler dev --config worker/wrangler.toml",

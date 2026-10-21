@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 import { describe, it, expect, vi } from 'vitest'
 import { runGeneration } from '../src/generation'
 

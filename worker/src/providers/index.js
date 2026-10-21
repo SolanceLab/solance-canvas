@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Provider registry ────────────────────────────────────────────────
 // Every provider module exports the same small contract:
 //

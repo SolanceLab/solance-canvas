@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── OpenAI (gpt-image-*) ─────────────────────────────────────────────
 
 export const id = 'openai';

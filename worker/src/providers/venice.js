@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Venice.ai ─────────────────────────────────────────────────────────
 // Venice is a privacy-first host whose written Acceptable-Use policy does
 // not prohibit adult content (verified 2026-08-16) and which states it does

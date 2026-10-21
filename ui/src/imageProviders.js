@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Image generation provider catalog ──────────────────────────────
 // Every provider here works with the Worker's own env key when one is
 // configured, OR a visitor key added in CanvasSettings — stored only in

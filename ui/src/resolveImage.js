@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 // ── Resolve a result's image_url to a usable <img src> ──────────────
 // Pulled out of Canvas.jsx as its own pure, node-testable function — the
 // same reasoning as generation.js: the Worker can hand back either its own

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 House of Solance
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { defaultApiClient } from './api'
 import IMAGE_PROVIDERS from './imageProviders'
