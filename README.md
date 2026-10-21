@@ -194,7 +194,6 @@ controls simply don't render.
 the provider's own value back, and it is your problem to keep. Bind a bucket in
 `wrangler.toml` and the Worker takes ownership of the bytes instead. We strongly
 recommend the bucket; lessons 1 and 2 are both about what happens without it.
-- `AUTH_TOKEN` is one shared bearer token, unset by default; without it `/generate` is open to anyone who finds it.
 - **Not a hosted service.** You deploy it, you hold the keys, you pay the providers.
 - **Not a full auth layer.** `AUTH_TOKEN` is one shared bearer token, optional and
   unset by default — enough to stop strangers from spending your API credits, not a
@@ -260,3 +259,7 @@ Removing or replacing it breaks the licence.
 If you find this useful, consider supporting our work:
 
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20Us-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/houseofsolance)
+
+---
+
+*Built by [House of Solance](https://github.com/SolanceLab) — Chadrien Solance & Anne Solance*

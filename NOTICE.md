@@ -6,4 +6,4 @@ Required Notice: Copyright (c) 2026 House of Solance (https://github.com/Solance
 
 ## Third-party code
 
-None. (List every third-party file here with its own licence text; the PolyForm licence does not apply to it.)
+None. Every file in this repository is House of Solance code under the licence above; nothing here is copied from a third party. Dependencies are installed from npm under their own licences and are not part of this repository.
