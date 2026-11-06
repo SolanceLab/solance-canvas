@@ -44,7 +44,7 @@ codex plugin marketplace add SolanceLab/plugins
 
 Then install solance-canvas from that store in Codex's plugin list. Give the AI your Worker's address when it asks; if the Worker has an `AUTH_TOKEN`, keep it in your environment as `CANVAS_AUTH_TOKEN`.
 
-**The Worker.**
+**The Worker.** (Run `npm install` in the repository root first; `npx` then uses the wrangler installed there, not a fresh download.)
 
 ```
 cd worker
