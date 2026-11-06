@@ -1,3 +1,4 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 // solance-canvas — multi-provider image-generation Worker.
 //
@@ -12,8 +13,8 @@
 // provider + key, dispatches to the provider module, and hands the result
 // through the storage adapter. All provider-specific HTTP is in
 // ./providers/**; all storage-specific logic is in ./storage.js.
-import { jsonResponse, handleOptions, withCors, isOriginAllowed } from './http.js';
-import { createR2Storage, createNullStorage, isStoredImageKey } from './storage.js';
+import { isOriginAllowed, handleOptions, withCors, jsonResponse } from './http.js';
+import { isStoredImageKey, createR2Storage, createNullStorage } from './storage.js';
 import { providers, resolveKey } from './providers/index.js';
 
 // Accept only the three resolution tiers the reference UI offers (1K/2K/4K);

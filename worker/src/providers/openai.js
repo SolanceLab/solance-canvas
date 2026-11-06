@@ -1,8 +1,9 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 // ── OpenAI (gpt-image-*) ─────────────────────────────────────────────
 
-export const id = 'openai';
 export const label = 'OpenAI';
+export const id = 'openai';
 // NOTE: the source this was carved from never resolved an OpenAI key from
 // env — only from a stored-key table this repo deliberately does not carry
 // over (see the top-level extraction notes). OPENAI_API_KEY is the

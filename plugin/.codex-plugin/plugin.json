@@ -1,0 +1,11 @@
+{
+  "name": "solance-canvas",
+  "version": "1.4.0",
+  "description": "Canvas: generate or edit images through your own Canvas Worker, with seven image providers behind one interface. The Worker runs in your own Cloudflare account.",
+  "author": {
+    "name": "House of Solance",
+    "url": "https://github.com/SolanceLab"
+  },
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "skills": "./skills/"
+}

@@ -1,3 +1,4 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 // ── fal.ai ────────────────────────────────────────────────────────────
 // fal fronts several model families (ByteDance Seedream, OpenAI gpt-image-2,
@@ -27,9 +28,9 @@
 
 import { normalizeLongEdge } from './shared.js';
 
-export const id = 'fal';
-export const label = 'fal.ai';
 export const envKeys = ['FAL_KEY', 'FAL_API_KEY'];
+export const label = 'fal.ai';
+export const id = 'fal';
 
 // Map an aspect ratio ("16:9", "1:1", "4:3"...) to a fal image_size preset.
 function falImageSize(aspect) {

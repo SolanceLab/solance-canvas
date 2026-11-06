@@ -1,3 +1,4 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 // ── Generate + poll orchestration ───────────────────────────────────
 // Pulled out of Canvas.jsx as its own pure, node-testable function.

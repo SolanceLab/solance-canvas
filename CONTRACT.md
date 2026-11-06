@@ -23,6 +23,7 @@ Named here, never valued.
 
 | Name | What it is |
 |---|---|
+| `CANVAS_URL`, `CANVAS_AUTH_TOKEN` | Plugin skill only: the address of your Worker and, when it has an `AUTH_TOKEN`, that token. Read from your environment, never typed into the chat |
 | `GEMINI_API_KEY` / `GOOGLE_API_KEY` | Google Gemini key |
 | `XAI_API_KEY` | xAI Grok key |
 | `FAL_KEY` / `FAL_API_KEY` | fal.ai key |

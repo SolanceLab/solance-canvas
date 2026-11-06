@@ -1,8 +1,9 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 import { useState, useEffect } from 'react'
 import IMAGE_PROVIDERS from './imageProviders'
-import DEFAULT_STYLES, { withDefaultStyles, readStoredStyles, STYLES_STORAGE_KEY } from './stylePresets'
-import { listProviderKeyStatus, setProviderKey, removeProviderKey } from './providerKeys'
+import DEFAULT_STYLES, { withDefaultStyles, STYLES_STORAGE_KEY, readStoredStyles } from './stylePresets'
+import { removeProviderKey, listProviderKeyStatus, setProviderKey } from './providerKeys'
 
 const labelClasses = "text-[11px] uppercase tracking-[0.18em] font-light text-[color:var(--page-muted)] font-mono"
 const cardClasses = "bg-[color:var(--ink-deep)] border border-[color:var(--rule-mid)] rounded-md p-4 sm:p-5"

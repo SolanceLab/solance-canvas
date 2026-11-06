@@ -3,6 +3,17 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0]
+
+### Added
+
+- Installable as a plugin for Claude Code and Codex: a skill that teaches your AI to call your own Canvas Worker (generate, poll a slow job, read whether the image was stored). The plugin sets nothing up; the Worker is still yours to put in your Cloudflare account.
+- A test that keeps both plugin manifests, the skill and `package.json` on one version.
+
+### Changed
+
+- The plugin is named `solance-canvas`, as the room is (it was `canvas`).
+
 ## [1.3.0]
 
 ### Changed

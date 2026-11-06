@@ -1,6 +1,7 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
-import { describe, it, expect, vi } from 'vitest'
-import { createApiClient, ApiError } from '../src/api'
+import { expect, it, vi, describe } from 'vitest'
+import { ApiError, createApiClient } from '../src/api'
 
 function okResponse(body = {}) {
   return new Response(JSON.stringify(body), { status: 200, headers: { 'content-type': 'application/json' } })

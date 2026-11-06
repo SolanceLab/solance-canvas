@@ -1,3 +1,4 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 // ── Venice.ai ─────────────────────────────────────────────────────────
 // Venice is a privacy-first host whose written Acceptable-Use policy does
@@ -18,9 +19,9 @@
 //     image, answering with RAW BINARY instead of JSON
 // The first two return base64 in `images[0]`.
 
-export const id = 'venice';
-export const label = 'Venice.ai';
 export const envKeys = ['VENICE_API_KEY'];
+export const label = 'Venice.ai';
+export const id = 'venice';
 
 // Venice's content filter. BOTH Venice endpoints default it ON, so this module
 // always sends the flag explicitly rather than relying on their default.

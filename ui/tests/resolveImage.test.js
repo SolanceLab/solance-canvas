@@ -1,5 +1,6 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
-import { describe, it, expect, vi } from 'vitest'
+import { expect, it, vi, describe } from 'vitest'
 import { resolveImage } from '../src/resolveImage'
 import { createApiClient } from '../src/api'
 

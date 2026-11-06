@@ -29,7 +29,22 @@ the bundled `demo/` harness: `npm run demo`.)*
 
 ## Install
 
-There is no one-step plugin install yet; Canvas is a Worker you deploy plus a UI you embed.
+Canvas is a Worker you put in your own Cloudflare account plus a UI you embed. No plugin sets that up for you.
+
+**The plugin.** Once your Worker is up, the plugin teaches Claude Code or Codex to call it: generate an image, poll a slow job, and check whether the image was stored.
+
+```
+claude plugin marketplace add SolanceLab/plugins
+claude plugin install solance-canvas@solancelab
+```
+
+```
+codex plugin marketplace add SolanceLab/plugins
+```
+
+Then install solance-canvas from that store in Codex's plugin list. Give the AI your Worker's address when it asks; if the Worker has an `AUTH_TOKEN`, keep it in your environment as `CANVAS_AUTH_TOKEN`.
+
+**The Worker.**
 
 ```
 cd worker

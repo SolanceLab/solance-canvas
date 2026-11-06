@@ -1,3 +1,4 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 // ── xAI Grok (Grok Imagine) ──────────────────────────────────────────
 // Serves BOTH the `grok` and `grok-image` provider ids — xAI has shipped
@@ -11,10 +12,10 @@
 // Grok image generated one day returned HTTP 404 two days later while
 // everything else about the request looked identical.)
 
-export const id = 'grok';
-export const label = 'xAI Grok';
 export const envKeys = ['XAI_API_KEY'];
+export const label = 'xAI Grok';
 export const aliases = ['grok-image'];
+export const id = 'grok';
 
 // Reference images go to a DIFFERENT endpoint (`/images/edits`), so they
 // cannot simply be added to the generations body. xAI takes them as JSON —

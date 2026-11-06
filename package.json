@@ -1,6 +1,6 @@
 {
   "name": "solance-canvas",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Multi-provider image generation for Cloudflare Workers — seven providers behind one interface, plus a React canvas UI.",
   "keywords": [
     "image-generation",

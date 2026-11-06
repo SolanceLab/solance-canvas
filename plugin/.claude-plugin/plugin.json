@@ -1,7 +1,7 @@
 {
-  "name": "canvas",
-  "description": "Canvas: multi-provider image generation behind one interface.",
-  "version": "1.0.0",
+  "name": "solance-canvas",
+  "description": "Canvas: generate or edit images through your own Canvas Worker, with seven image providers behind one interface. The Worker runs in your own Cloudflare account.",
+  "version": "1.4.0",
   "author": {
     "name": "House of Solance"
   },

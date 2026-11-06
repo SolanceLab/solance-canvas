@@ -1,3 +1,4 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 // ── Google Gemini ────────────────────────────────────────────────────
 // generateContent with inline image parts. Full multi-reference support:
@@ -6,9 +7,9 @@
 
 import { parseReference } from './shared.js';
 
-export const id = 'gemini';
-export const label = 'Google Gemini';
 export const envKeys = ['GEMINI_API_KEY', 'GOOGLE_API_KEY'];
+export const label = 'Google Gemini';
+export const id = 'gemini';
 
 export async function generate(env, { prompt, model, key, references }) {
   const contents = [];

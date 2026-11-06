@@ -1,8 +1,9 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { defaultApiClient } from './api'
 import IMAGE_PROVIDERS from './imageProviders'
-import DEFAULT_STYLES, { withDefaultStyles, readStoredStyles, STYLES_STORAGE_KEY } from './stylePresets'
+import DEFAULT_STYLES, { withDefaultStyles, STYLES_STORAGE_KEY, readStoredStyles } from './stylePresets'
 import { getProviderKey } from './providerKeys'
 import { runGeneration } from './generation'
 import { resolveImage as resolveImagePure } from './resolveImage'

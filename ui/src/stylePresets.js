@@ -1,3 +1,4 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 // ── Canvas style presets ───────────────────────────────────────────
 // Single source of truth, imported by Canvas.jsx + CanvasSettings.jsx.
@@ -83,8 +84,8 @@ export const DEFAULT_STYLES = [
 // from where this component was ported from — if you rename either key in
 // your own fork, keep this same read-both / write-one pattern, deliberately,
 // not blind.
-export const STYLES_STORAGE_KEY = 'hos_canvas_styles'
 export const LEGACY_STYLES_STORAGE_KEY = 'hos_generator_styles'
+export const STYLES_STORAGE_KEY = 'hos_canvas_styles'
 
 // Returns the parsed stored presets, or null if there are none to read.
 // Callers pass the result through withDefaultStyles().

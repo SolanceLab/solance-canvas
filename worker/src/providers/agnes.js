@@ -1,3 +1,4 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 // ── Agnes AI (Sapiens AI) ────────────────────────────────────────────
 // OpenAI-compatible gateway: POST https://apihub.agnes-ai.com/v1/images/generations.
@@ -38,9 +39,9 @@
 
 import { normalizeLongEdge } from './shared.js';
 
-export const id = 'agnes';
-export const label = 'Agnes AI (Sapiens AI)';
 export const envKeys = ['AGNES_API_KEY'];
+export const label = 'Agnes AI (Sapiens AI)';
+export const id = 'agnes';
 
 const AGNES_RATIOS = ['1:1', '3:4', '4:3', '16:9', '9:16', '2:3', '3:2', '21:9'];
 

@@ -1,8 +1,9 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
 // ── Stability AI ──────────────────────────────────────────────────────
 
-export const id = 'stability';
 export const label = 'Stability AI';
+export const id = 'stability';
 // NOTE: same caveat as openai.js — the source never resolved a Stability
 // key from env, only from a stored-key table this repo does not carry
 // over. STABILITY_API_KEY follows the naming convention of the other

@@ -1,12 +1,13 @@
+// solance-canvas — Copyright (c) 2026 House of Solance. PolyForm Noncommercial 1.0.0. Required Notice: Copyright (c) 2026 House of Solance (https://github.com/SolanceLab)
 // Copyright (c) 2026 House of Solance
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { beforeEach, expect, it, describe, afterEach } from 'vitest'
 import {
-  PROVIDER_KEYS_STORAGE_KEY,
-  readProviderKeys,
-  getProviderKey,
-  setProviderKey,
   removeProviderKey,
   listProviderKeyStatus,
+  readProviderKeys,
+  PROVIDER_KEYS_STORAGE_KEY,
+  getProviderKey,
+  setProviderKey,
 } from '../src/providerKeys'
 
 // providerKeys.js is the ONLY module allowed to read a stored key's VALUE.
